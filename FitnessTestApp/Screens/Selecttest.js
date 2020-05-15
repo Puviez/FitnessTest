@@ -8,7 +8,7 @@ import {
   StatusBar,
   Picker,
 } from 'react-native';
-import NavButton from './Navbutton.js';
+import NavButton from '../Components/Navbutton.js';
 
 
 class SelectTest extends React.Component {

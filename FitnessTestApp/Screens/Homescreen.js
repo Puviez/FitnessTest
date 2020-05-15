@@ -9,7 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-import NavButton from './Navbutton.js';
+import NavButton from '../Components/Navbutton.js';
 
 
 class Homescreen extends React.Component {

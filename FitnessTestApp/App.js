@@ -10,11 +10,11 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Homescreen from './Components/Homescreen.js'
-import Settings from './Components/Settings.js'
-import SelectTest from './Components/Selecttest.js';
-import History from './Components/History.js';
-import Test from './Components/Test.js';
+import Homescreen from './Screens/Homescreen.js'
+import Settings from './Screens/Settings.js'
+import SelectTest from './Screens/Selecttest.js';
+import History from './Screens/History.js';
+import Test from './Screens/Test.js';
 
 const Stack = createStackNavigator();
 
