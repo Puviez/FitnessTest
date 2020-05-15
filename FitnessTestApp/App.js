@@ -1,19 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+import Homescreen from './Components/Homescreen.js'
+import Settings from './Components/Settings.js'
+import SelectTest from './Components/Selecttest.js';
+import History from './Components/History.js';
+import Test from './Components/Test.js';
+
+const Stack = createStackNavigator();
+
+class App extends React.Component {
+  render () {
+      return (
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={Homescreen} />
+            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="SelectTest" component={SelectTest} />
+            <Stack.Screen name="History" component={History} />
+            <Stack.Screen name="IPPT" component={Test} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      )
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App

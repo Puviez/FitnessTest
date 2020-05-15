@@ -8,10 +8,10 @@ import {
   StatusBar,
 } from 'react-native';
 
-class SelectTest extends React.Component {
+class History extends React.Component {
     render () {
         return (
-            <View style={styles.container}><Text>Select Test</Text></View>
+            <View style={styles.container}><Text>History</Text></View>
         )
     }
   }
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     }
 })
   
-export default SelectTest
+export default History
