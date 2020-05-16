@@ -9,27 +9,16 @@ import {
   Picker,
 } from 'react-native';
 
-const repCount = [...Array(101).keys()];
+const minsCount = [...Array(60).keys()];
+const secCount = [...Array(60).keys()];
 
-class StationInput extends React.Component {
+class TimeInput extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            reps: 0,
-            points: 0,
-            nextpoint: 0
-
+            reps: 0
         }
     }
-
-    scoreCalc = () => {
-        console.log(this.state.reps)
-        const pts = this.props.calc(this.state.reps);
-        this.setState({
-            points: pts
-        })
-    }
-
     render () {
         return (
             <View style={styles.container}>
@@ -40,17 +29,11 @@ class StationInput extends React.Component {
                     <Picker
                         selectedValue={this.state.reps}
                         style={styles.picker}
-                        onValueChange={(itemValue, itemIndex) => {
-                            this.setState({reps: itemValue}, () => {
-                                this.scoreCalc();
-                            });
-                        }      
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({reps: itemValue})
                     }>
                         {repCount.map((rep) => <Picker.Item label={rep.toString()} value={rep.toString()} key={rep.toString()} />)}
                     </Picker>
-                </View>
-                <View style={styles.textView}>
-                    <Text style={styles.text}>{this.state.points}</Text>
                 </View>
             </View>
         )
@@ -65,14 +48,14 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     picker: {
-        flex: 0.25,
+        flex: 0.5,
         // borderWidth: 1,
         // borderColor: "black",
         height: 50, 
         width: 100
     },
     textView: {
-        flex: 0.25,
+        flex: 0.5,
         // borderColor: "black",
         // borderWidth: 1
     },
@@ -82,4 +65,4 @@ const styles = StyleSheet.create({
 
 })
   
-export default StationInput
+export default TimeInput
