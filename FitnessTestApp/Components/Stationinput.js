@@ -23,7 +23,7 @@ class StationInput extends React.Component {
     }
 
     scoreCalc = () => {
-        console.log(this.state.reps)
+        // console.log(this.state.reps)
         const pts = this.props.calc(this.state.reps);
         this.setState({
             points: pts
