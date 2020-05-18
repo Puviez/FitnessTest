@@ -11,6 +11,7 @@ import {
 
 import StationInput from '../Components/Stationinput';
 import range from '../Functions/Range';
+import Stopwatch from '../Components/Stopwatch';
 
 
 const pushUpScoreChart = {
@@ -843,6 +844,7 @@ class Test extends React.Component {
       return (
           <View style={styles.container}>
             <Text>IPPT</Text>
+            <Stopwatch />
             <StationInput station={"Push Ups"} calc={this.scoreCalc} />
             <StationInput station={"Sit Ups"} calc={this.scoreCalc} />
           </View>

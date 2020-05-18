@@ -9,8 +9,8 @@ import {
   Picker,
 } from 'react-native';
 
-const minsCount = [...Array(60).keys()];
-const secCount = [...Array(60).keys()];
+const minsCount = range(60);
+const secCount = range(60);
 
 class TimeInput extends React.Component {
     constructor (props) {
