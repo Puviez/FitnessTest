@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  TouchableOpacity
 } from 'react-native';
 import Buttons from './Buttons.js';
 
@@ -56,13 +57,19 @@ class Stopwatch extends React.Component {
         <View>
           <Text> {hours} : {minutes} : {seconds} : {centiseconds} </Text>
           {this.state.timerOn === false &&
-            (<Buttons name={"Start"} func={this.start} />)
+            (<TouchableOpacity onPress={this.start}>
+                <Text>Start</Text>
+              </TouchableOpacity>)
           }
           {this.state.timerOn && 
-            (<Buttons name={"Stop"} func={this.stop} />)
+            (<TouchableOpacity onPress={this.stop}>
+                <Text>Stop</Text>
+              </TouchableOpacity>)
           }
           {this.state.timerOn === false && this.state.time > 0 &&
-            (<Buttons name={"Reset"} func={this.reset} />)
+            (<TouchableOpacity onPress={this.reset}>
+                <Text>Reset</Text>
+              </TouchableOpacity>)
           }
         </View>
     )

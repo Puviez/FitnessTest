@@ -8,15 +8,17 @@ import {
   StatusBar,
   Picker,
 } from 'react-native';
+import range from '../Functions/Range';
 
-const minsCount = range(60);
-const secCount = range(60);
+const momentCount = range(60);
 
 class TimeInput extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            reps: 0
+            mins: 0,
+            seconds: 0,
+            points: 0,
         }
     }
     render () {
@@ -25,15 +27,30 @@ class TimeInput extends React.Component {
                 <View style={styles.textView}>
                     <Text style={styles.text}>{this.props.station}</Text>
                 </View>
-                <View>
+                <View style={styles.timeSelect}>
                     <Picker
-                        selectedValue={this.state.reps}
+                        selectedValue={this.state.mins}
                         style={styles.picker}
                         onValueChange={(itemValue, itemIndex) =>
-                            this.setState({reps: itemValue})
+                            this.setState({mins: itemValue})
                     }>
-                        {repCount.map((rep) => <Picker.Item label={rep.toString()} value={rep.toString()} key={rep.toString()} />)}
+                        {momentCount.map((mins) => <Picker.Item label={mins.toString()} value={mins.toString()} key={mins.toString()} />)}
                     </Picker>
+                    <Text style={styles.text}>Mins</Text>
+                </View>
+                <View style={styles.timeSelect}>
+                    <Picker
+                        selectedValue={this.state.seconds}
+                        style={styles.picker}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({seconds: itemValue})
+                    }>
+                        {momentCount.map((secs) => <Picker.Item label={secs.toString()} value={secs.toString()} key={secs.toString()} />)}
+                    </Picker>
+                    <Text style={styles.text}>Secs</Text>
+                </View>
+                <View style={styles.textView}>
+                    <Text style={styles.text}>{this.state.points}</Text>
                 </View>
             </View>
         )
@@ -46,6 +63,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center"
+    },
+    timeSelect: {
+        flex: 0.5,
+
     },
     picker: {
         flex: 0.5,

@@ -9,8 +9,6 @@ import {
   Picker,
 } from 'react-native';
 
-const repCount = [...Array(101).keys()];
-
 class StationInput extends React.Component {
     constructor (props) {
         super (props);
@@ -31,6 +29,8 @@ class StationInput extends React.Component {
     }
 
     render () {
+        const repCount = [...Array(101).keys()];
+        
         return (
             <View style={styles.container}>
                 <View style={styles.textView}>
