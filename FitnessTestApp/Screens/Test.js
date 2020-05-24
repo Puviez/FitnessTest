@@ -12,7 +12,8 @@ import {
 import StationInput from '../Components/Stationinput';
 import range from '../Functions/Range';
 import Stopwatch from '../Components/Stopwatch';
-
+import Timer from '../Components/Timer';
+import Buttons from '../Components/Buttons';
 
 const pushUpScoreChart = {
   1: {
@@ -770,7 +771,8 @@ class Test extends React.Component {
       pushUps: 0,
       pushUpScore: 0,
       sitUps: 0,
-      sitUpScore: 0
+      sitUpScore: 0,
+      stopwatch: false
     }
   }
 
@@ -840,11 +842,18 @@ class Test extends React.Component {
     return points
   }
 
+  toggleTimer = () => {
+    this.setState({stopwatch: !this.state.stopwatch})
+  }
+
   render () {
       return (
           <View style={styles.container}>
             <Text>IPPT</Text>
-            <Stopwatch />
+            {this.state.stopwatch  && (<Stopwatch />)} 
+            {this.state.stopwatch === false && (<Timer />)}
+            {this.state.stopwatch  && (<Buttons func={this.toggleTimer} name={"Timer"} />)} 
+            {this.state.stopwatch === false && (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}
             <StationInput station={"Push Ups"} calc={this.scoreCalc} />
             <StationInput station={"Sit Ups"} calc={this.scoreCalc} />
           </View>
