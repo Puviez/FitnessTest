@@ -7,13 +7,16 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import Stopwatch from '../Components/Stopwatch';
-import Timer from '../Components/Timer';
+import TimeInput from '../Components/Timeinput';
+
+
 
 class Settings extends React.Component {
     render () {
         return (
-            <View style={styles.container}><Timer /></View>
+            <View style={styles.container}>
+                <TimeInput />
+            </View>
         )
     }
   }

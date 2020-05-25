@@ -9,6 +9,8 @@ import {
   Picker,
 } from 'react-native';
 
+import RNPickerSelect from 'react-native-picker-select';
+
 class StationInput extends React.Component {
     constructor (props) {
         super (props);
@@ -37,17 +39,21 @@ class StationInput extends React.Component {
                     <Text style={styles.text}>{this.props.station}</Text>
                 </View>
                 <View>
-                    <Picker
-                        selectedValue={this.state.reps}
-                        style={styles.picker}
+                    <RNPickerSelect
+                        placeholder={{label: "Reps", value: "Reps"}}
                         onValueChange={(itemValue, itemIndex) => {
                             this.setState({reps: itemValue}, () => {
                                 this.scoreCalc();
-                            });
-                        }      
-                    }>
-                        {repCount.map((rep) => <Picker.Item label={rep.toString()} value={rep.toString()} key={rep.toString()} />)}
-                    </Picker>
+                                });
+                            }      
+                        }   
+                        items={
+                            repCount.map((reps) => ({
+                                label: reps.toString(), 
+                                value: reps.toString(), 
+                                key: reps.toString()
+                                }))} 
+                    />
                 </View>
                 <View style={styles.textView}>
                     <Text style={styles.text}>{this.state.points}</Text>

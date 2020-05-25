@@ -7,7 +7,9 @@ import {
   Text,
   StatusBar,
   Picker,
+  TextInput,
 } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 import range from '../Functions/Range';
 
 const momentCount = range(60);
@@ -28,26 +30,28 @@ class TimeInput extends React.Component {
                     <Text style={styles.text}>{this.props.station}</Text>
                 </View>
                 <View style={styles.timeSelect}>
-                    <Picker
-                        selectedValue={this.state.mins}
-                        style={styles.picker}
-                        onValueChange={(itemValue, itemIndex) =>
-                            this.setState({mins: itemValue})
-                    }>
-                        {momentCount.map((mins) => <Picker.Item label={mins.toString()} value={mins.toString()} key={mins.toString()} />)}
-                    </Picker>
                     <Text style={styles.text}>Mins</Text>
+                    <RNPickerSelect onValueChange={(itemValue, itemIndex) =>
+                            this.setState({mins: itemValue})}
+                            items={
+                                momentCount.map((mins) => ({
+                                    label: mins.toString(), 
+                                    value: mins.toString(), 
+                                    key: mins.toString()
+                                    }))} 
+                    />
                 </View>
                 <View style={styles.timeSelect}>
-                    <Picker
-                        selectedValue={this.state.seconds}
-                        style={styles.picker}
-                        onValueChange={(itemValue, itemIndex) =>
-                            this.setState({seconds: itemValue})
-                    }>
-                        {momentCount.map((secs) => <Picker.Item label={secs.toString()} value={secs.toString()} key={secs.toString()} />)}
-                    </Picker>
                     <Text style={styles.text}>Secs</Text>
+                    <RNPickerSelect onValueChange={(itemValue, itemIndex) =>
+                            this.setState({mins: itemValue})}
+                            items={
+                                momentCount.map((mins) => ({
+                                    label: mins.toString(), 
+                                    value: mins.toString(), 
+                                    key: mins.toString()
+                                    }))} 
+                    />
                 </View>
                 <View style={styles.textView}>
                     <Text style={styles.text}>{this.state.points}</Text>

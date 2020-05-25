@@ -15,6 +15,7 @@ class Timer extends React.Component {
     super(props);
     this.state = {
       time: 0,
+      isActive: false,
       unit: "Hour"
     }
   }
@@ -34,6 +35,7 @@ class Timer extends React.Component {
         this.timer = setTimeout(this.timeUp, 200);
         break;
     }
+    this.setState({isActive: true})
   }
     
   
@@ -52,6 +54,7 @@ class Timer extends React.Component {
         this.timer = setTimeout(this.timeDown, 200);
         break;
     }
+    this.state.time < 0 ? this.setState({isActive: false}) : this.setState({isActive: this.state.isActive})
   }
 
   stopTime = () => {
@@ -59,12 +62,15 @@ class Timer extends React.Component {
   }
 
   startTimer = () => {
+    if(this.state.isActive) {
       this.state.time > 0 ? this.setState({time: this.state.time - 100}) : () => {clearTimeout(this.timerStart)}
       this.timerStart = setTimeout(this.startTimer, 100)
+    }
   }
 
   stopTimer = () => {
       clearTimeout(this.timerStart)
+      this.state.time > 0 ? this.setState({isActive: true}) : this.setState({isActive: false})
   }
   
   render () {
@@ -74,7 +80,6 @@ class Timer extends React.Component {
 
     return (
         <View>
-          <Text> {hours} : {minutes} : {seconds} </Text>
           <TouchableOpacity onPressIn={() => {this.setState({unit: "Hour"}, () => {this.timeUp()})}} onPressOut={this.stopTime}>
             <Text>HOUR UP</Text>
           </TouchableOpacity>
@@ -84,6 +89,7 @@ class Timer extends React.Component {
           <TouchableOpacity onPressIn={() => {this.setState({unit: "Second"}, () => {this.timeUp()})}} onPressOut={this.stopTime}>
             <Text>SECOND UP</Text>
           </TouchableOpacity>
+          <Text> {hours} : {minutes} : {seconds} </Text>
           <TouchableOpacity onPressIn={() => {this.setState({unit: "Hour"}, () => {this.timeDown()})}} onPressOut={this.stopTime}>
             <Text>HOUR DOWN</Text>
           </TouchableOpacity>
