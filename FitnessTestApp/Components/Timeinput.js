@@ -34,6 +34,7 @@ class TimeInput extends React.Component {
         })
     }
 
+
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.age !== this.props.age) {
             this.scoreCalc();

@@ -1536,9 +1536,14 @@ class Test extends React.Component {
       run: reps,
       runScore: points
     }))
-    
     return points
   }
+
+  updateTotal = () => {
+    const total = parseInt(this.state.pushUpScore) + parseInt(this.state.sitUpScore) + parseInt(this.state.runScore);
+    return total
+  }
+
 
   toggleTimer = () => {
     this.setState({stopwatch: !this.state.stopwatch})
@@ -1547,7 +1552,7 @@ class Test extends React.Component {
   render () {
       return (
           <View style={styles.container}>
-            <Text>IPPT</Text>
+            <Text style={styles.text}>IPPT</Text>
             {this.state.stopwatch ? (<Stopwatch />) : (<Timer />)} 
             {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}
             <View>
@@ -1564,9 +1569,10 @@ class Test extends React.Component {
                           }))} 
               />
             </View>   
-            <TimeInput station={"2.4km Run"} calc={this.scoreCalc} age={this.state.age} />       
-            <StationInput station={"Push Ups"} calc={this.scoreCalc} age={this.state.age} />
-            <StationInput station={"Sit Ups"} calc={this.scoreCalc} age={this.state.age} />
+            <TimeInput station={"2.4km Run"} calc={this.scoreCalc} age={this.state.age} total={this.updateTotal} />       
+            <StationInput station={"Push Ups"} calc={this.scoreCalc} age={this.state.age} total={this.updateTotal} />
+            <StationInput station={"Sit Ups"} calc={this.scoreCalc} age={this.state.age} total={this.updateTotal} />
+            <Text style={styles.text}>{this.updateTotal()}</Text>
           </View>
       )
   }
@@ -1577,7 +1583,10 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center",
       alignItems: "center"
-  }
+  },
+  text: {
+    fontSize: 28
+}
 })
 
   
