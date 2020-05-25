@@ -10,6 +10,7 @@ import {
   TextInput,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+
 import range from '../Functions/Range';
 
 const momentCount = range(60);
@@ -18,7 +19,7 @@ class TimeInput extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            mins: 0,
+            mins: 59,
             seconds: 0,
             points: 0,
         }
@@ -31,6 +32,12 @@ class TimeInput extends React.Component {
         this.setState({
             points: pts
         })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.age !== this.props.age) {
+            this.scoreCalc();
+        }
     }
 
     render () {

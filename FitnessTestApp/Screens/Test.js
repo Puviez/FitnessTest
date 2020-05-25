@@ -8,6 +8,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 import StationInput from '../Components/Stationinput';
 import range from '../Functions/Range';
@@ -1457,7 +1458,7 @@ class Test extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      age: 26,
+      age: 0,
       pushUps: 0,
       pushUpScore: 0,
       sitUps: 0,
@@ -1474,44 +1475,45 @@ class Test extends React.Component {
     let scoreChart;
     station === "Push Ups" ? scoreChart = pushUpScoreChart : station === "Sit Ups" ? scoreChart = sitUpScoreChart : scoreChart = runScoreChart
     // console.log(`Age is ${this.state.age}`)
+    const age = parseInt(this.state.age)
     switch (true) {
-      case (this.state.age >= 58):
+      case (age >= 58):
         ageGroup = 14;
         break;
-      case (this.state.age >= 55 && this.state.age < 58):
+      case (age >= 55 && age < 58):
         ageGroup = 13;
         break;
-      case (this.state.age >= 52 && this.state.age < 55):
+      case (age >= 52 && age < 55):
         ageGroup = 12;
         break;
-      case (this.state.age >= 49 && this.state.age < 52):
+      case (age >= 49 && age < 52):
         ageGroup = 11;
         break;
-      case (this.state.age >= 46 && this.state.age < 49):
+      case (age >= 46 && age < 49):
         ageGroup = 10;
         break;
-      case (this.state.age >= 43 && this.state.age < 46):
+      case (age >= 43 && age < 46):
         ageGroup = 9;
         break;
-      case (this.state.age >= 40 && this.state.age < 43):
+      case (age >= 40 && age < 43):
         ageGroup = 8;
         break;
-      case (this.state.age >= 37 && this.state.age < 40):
+      case (age >= 37 && age < 40):
         ageGroup = 7;
         break;
-      case (this.state.age >= 34 && this.state.age < 37):
+      case (age >= 34 && age < 37):
         ageGroup = 6;
         break;
-      case (this.state.age >= 31 && this.state.age < 34):
+      case (age >= 31 && age < 34):
         ageGroup = 5;
         break;
-      case (this.state.age >= 28 && this.state.age < 31):
+      case (age >= 28 && age < 31):
         ageGroup = 4;
         break;
-      case (this.state.age >= 25 && this.state.age < 28):
+      case (age >= 25 && age < 28):
         ageGroup = 3;
         break;
-      case (this.state.age >= 22 && this.state.age < 25):
+      case (age >= 22 && age < 25):
         ageGroup = 2;
         break;
       default:
@@ -1547,10 +1549,24 @@ class Test extends React.Component {
           <View style={styles.container}>
             <Text>IPPT</Text>
             {this.state.stopwatch ? (<Stopwatch />) : (<Timer />)} 
-            {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}      
-            <TimeInput station={"2.4km Run"} calc={this.scoreCalc} />       
-            <StationInput station={"Push Ups"} calc={this.scoreCalc} />
-            <StationInput station={"Sit Ups"} calc={this.scoreCalc} />
+            {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}
+            <View>
+              <Text>Age: </Text>
+              <RNPickerSelect 
+                  placeholder={{label: "Age", value: "Age"}}
+                  onValueChange={(itemValue, itemIndex) =>
+                      this.setState({age: itemValue})}
+                  items={
+                      range(100).map((age) => ({
+                          label: age.toString(), 
+                          value: age.toString(), 
+                          key: age.toString()
+                          }))} 
+              />
+            </View>   
+            <TimeInput station={"2.4km Run"} calc={this.scoreCalc} age={this.state.age} />       
+            <StationInput station={"Push Ups"} calc={this.scoreCalc} age={this.state.age} />
+            <StationInput station={"Sit Ups"} calc={this.scoreCalc} age={this.state.age} />
           </View>
       )
   }

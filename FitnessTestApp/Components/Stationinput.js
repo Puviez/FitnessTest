@@ -30,6 +30,12 @@ class StationInput extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.age !== this.props.age) {
+            this.scoreCalc();
+        }
+    }
+
     render () {
         const repCount = [...Array(101).keys()];
         
