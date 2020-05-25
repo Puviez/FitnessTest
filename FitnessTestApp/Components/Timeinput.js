@@ -23,6 +23,16 @@ class TimeInput extends React.Component {
             points: 0,
         }
     }
+
+    scoreCalc = () => {
+        const time = Math.ceil(((parseInt(this.state.mins) * 60) + (parseInt(this.state.seconds))) / 10) * 10
+        console.log(time)
+        const pts = this.props.calc(time, this.props.station);
+        this.setState({
+            points: pts
+        })
+    }
+
     render () {
         return (
             <View style={styles.container}>
@@ -31,29 +41,38 @@ class TimeInput extends React.Component {
                 </View>
                 <View style={styles.timeSelect}>
                     <Text style={styles.text}>Mins</Text>
-                    <RNPickerSelect onValueChange={(itemValue, itemIndex) =>
-                            this.setState({mins: itemValue})}
-                            items={
-                                momentCount.map((mins) => ({
-                                    label: mins.toString(), 
-                                    value: mins.toString(), 
-                                    key: mins.toString()
-                                    }))} 
+                    <RNPickerSelect 
+                        placeholder={{label: "Mins", value: "Mins"}}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({mins: itemValue}, () => {
+                                this.scoreCalc();
+                            })}
+                        items={
+                            momentCount.map((mins) => ({
+                                label: mins.toString(), 
+                                value: mins.toString(), 
+                                key: mins.toString()
+                                }))} 
                     />
                 </View>
                 <View style={styles.timeSelect}>
                     <Text style={styles.text}>Secs</Text>
-                    <RNPickerSelect onValueChange={(itemValue, itemIndex) =>
-                            this.setState({mins: itemValue})}
-                            items={
-                                momentCount.map((mins) => ({
-                                    label: mins.toString(), 
-                                    value: mins.toString(), 
-                                    key: mins.toString()
-                                    }))} 
+                    <RNPickerSelect 
+                        placeholder={{label: "Seconds", value: "Seconds"}}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({seconds: itemValue}, () => {
+                                this.scoreCalc();
+                            })}
+                        items={
+                            momentCount.map((secs) => ({
+                                label: secs.toString(), 
+                                value: secs.toString(), 
+                                key: secs.toString()
+                                }))} 
                     />
                 </View>
                 <View style={styles.textView}>
+                    <Text style={styles.text}>Points</Text>
                     <Text style={styles.text}>{this.state.points}</Text>
                 </View>
             </View>

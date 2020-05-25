@@ -39,6 +39,7 @@ class StationInput extends React.Component {
                     <Text style={styles.text}>{this.props.station}</Text>
                 </View>
                 <View>
+                    <Text style={styles.text}>Reps</Text>
                     <RNPickerSelect
                         placeholder={{label: "Reps", value: "Reps"}}
                         onValueChange={(itemValue, itemIndex) => {
@@ -56,6 +57,7 @@ class StationInput extends React.Component {
                     />
                 </View>
                 <View style={styles.textView}>
+                    <Text style={styles.text}>Points</Text>
                     <Text style={styles.text}>{this.state.points}</Text>
                 </View>
             </View>
