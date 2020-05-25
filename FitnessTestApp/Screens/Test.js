@@ -1519,7 +1519,7 @@ class Test extends React.Component {
     }
     // console.log(`Age Group is ${ageGroup}`)
     // console.log(`You did ${reps} reps`)
-    station === "2.4km Run" ? (points = scoreChart[ageGroup][reps]) : 
+    station === "2.4km Run" ? (reps < Math.min(... Object.keys(scoreChart[ageGroup])) ? points = 50 : (reps > Math.max(... Object.keys(scoreChart[ageGroup])) ? points = 0 : points = scoreChart[ageGroup][reps])) : 
     (Object.keys(scoreChart[ageGroup]).forEach((key) => {
       scoreChart[ageGroup][key].includes(parseInt(reps)) ? points = key : points = points
     }))
