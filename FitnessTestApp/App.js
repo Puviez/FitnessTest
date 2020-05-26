@@ -14,7 +14,7 @@ import Homescreen from './Screens/Homescreen.js'
 import Settings from './Screens/Settings.js'
 import SelectTest from './Screens/Selecttest.js';
 import History from './Screens/History.js';
-import Test from './Screens/Test.js';
+import IPPT from './Screens/IPPT.js';
 
 const Stack = createStackNavigator();
 
@@ -27,7 +27,7 @@ class App extends React.Component {
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="SelectTest" component={SelectTest} />
             <Stack.Screen name="History" component={History} />
-            <Stack.Screen name="IPPT" component={Test} />
+            <Stack.Screen name="IPPT" component={IPPT} />
           </Stack.Navigator>
         </NavigationContainer>
       )

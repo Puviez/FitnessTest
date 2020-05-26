@@ -1454,7 +1454,7 @@ const runScoreChart = {
   }
 }
 
-class Test extends React.Component {
+class IPPT extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
@@ -1465,7 +1465,7 @@ class Test extends React.Component {
       sitUpScore: 0,
       run: 0,
       runScore: 0,
-      stopwatch: false
+      stopwatch: true
     }
   }
 
@@ -1569,10 +1569,15 @@ class Test extends React.Component {
                           }))} 
               />
             </View>   
-            <TimeInput station={"2.4km Run"} calc={this.scoreCalc} age={this.state.age} total={this.updateTotal} />       
-            <StationInput station={"Push Ups"} calc={this.scoreCalc} age={this.state.age} total={this.updateTotal} />
-            <StationInput station={"Sit Ups"} calc={this.scoreCalc} age={this.state.age} total={this.updateTotal} />
-            <Text style={styles.text}>{this.updateTotal()}</Text>
+            <TimeInput station={"2.4km Run"} calc={this.scoreCalc} age={this.state.age} />       
+            <StationInput station={"Push Ups"} calc={this.scoreCalc} age={this.state.age} />
+            <StationInput station={"Sit Ups"} calc={this.scoreCalc} age={this.state.age} />
+            <Text style={styles.text}>Total: {this.updateTotal()} Points</Text>
+            {this.updateTotal() >= 90 ? (<Text style={styles.gold}>GOLD (Commando/Divers)</Text>) : 
+              this.updateTotal() >= 85 ? (<Text style={styles.gold}>GOLD</Text>) : 
+                this.updateTotal() >= 75 ? (<Text style={styles.silver}>SILVER</Text>) : 
+                  this.updateTotal() >= 60 ? (<Text style={styles.pass}>PASS (Incentive)</Text>) :
+                    this.updateTotal() >= 50 ? (<Text style={styles.pass}>PASS</Text>) : (<Text style={styles.text}>FAIL</Text>)} 
           </View>
       )
   }
@@ -1582,13 +1587,27 @@ const styles = StyleSheet.create({
   container: {
       flex: 1,
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
+      marginBottom: 40
   },
   text: {
     fontSize: 28
-}
+  },
+  gold: {
+    fontSize: 28,
+    backgroundColor: "gold"
+  },
+  silver: {
+    fontSize: 28,
+    backgroundColor: "silver"
+  },
+  pass: {
+    fontSize: 28,
+    backgroundColor: "lightgreen"
+  }
+
 })
 
   
-export default Test
+export default IPPT
 
