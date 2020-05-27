@@ -15,6 +15,7 @@ import Settings from './Screens/Settings.js'
 import SelectTest from './Screens/Selecttest.js';
 import History from './Screens/History.js';
 import IPPT from './Screens/IPPT.js';
+import SealPST from './Screens/NavySealPST.js';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ class App extends React.Component {
             <Stack.Screen name="SelectTest" component={SelectTest} />
             <Stack.Screen name="History" component={History} />
             <Stack.Screen name="IPPT" component={IPPT} />
+            <Stack.Screen name="US Navy Seals PST" component={SealPST} />
           </Stack.Navigator>
         </NavigationContainer>
       )

@@ -16,9 +16,8 @@ class StationInput extends React.Component {
         super (props);
         this.state = {
             reps: 0,
-            points: 0,
+            points: "-",
             nextpoint: 0
-
         }
     }
 
@@ -30,6 +29,7 @@ class StationInput extends React.Component {
         })
     }
 
+    // Just for IPPT
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.age !== this.props.age) {
             this.scoreCalc();
@@ -44,7 +44,7 @@ class StationInput extends React.Component {
                 <View style={styles.textView}>
                     <Text style={styles.text}>{this.props.station}</Text>
                 </View>
-                <View>
+                <View style={styles.picker}>
                     <Text style={styles.text}>Reps</Text>
                     <RNPickerSelect
                         placeholder={{label: "Reps", value: "Reps"}}
@@ -63,7 +63,7 @@ class StationInput extends React.Component {
                     />
                 </View>
                 <View style={styles.textView}>
-                    <Text style={styles.text}>Points</Text>
+                    {this.props.pf ? <Text style={styles.text}>Result</Text> : <Text style={styles.text}>Points</Text>}
                     <Text style={styles.text}>{this.state.points}</Text>
                 </View>
             </View>
@@ -79,14 +79,14 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     picker: {
-        flex: 0.25,
+        flex: 0.4,
         // borderWidth: 1,
         // borderColor: "black",
         height: 50, 
-        width: 100
+        width: 100,
     },
     textView: {
-        flex: 0.25,
+        flex: 0.5,
         // borderColor: "black",
         // borderWidth: 1
     },

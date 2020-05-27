@@ -21,7 +21,7 @@ class TimeInput extends React.Component {
         this.state = {
             mins: 59,
             seconds: 0,
-            points: 0,
+            points: "-",
         }
     }
 
@@ -80,7 +80,7 @@ class TimeInput extends React.Component {
                     />
                 </View>
                 <View style={styles.textView}>
-                    <Text style={styles.text}>Points</Text>
+                    {this.props.pf ? <Text style={styles.text}>Result</Text> : <Text style={styles.text}>Points</Text>}
                     <Text style={styles.text}>{this.state.points}</Text>
                 </View>
             </View>
