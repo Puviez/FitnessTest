@@ -9,6 +9,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
+import { CheckBox } from 'react-native-elements'
 import RNPickerSelect from 'react-native-picker-select';
 
 import StationInput from '../Components/Stationinput';
@@ -24,6 +25,9 @@ class MarinePFT extends React.Component {
     super (props);
     this.state = {
       exChoice: true,
+
+      push: false, 
+
       pushUps: 0,
 
       crunches: 0,
@@ -33,6 +37,8 @@ class MarinePFT extends React.Component {
       run: 0,
 
       gender: false,
+
+      male: true,
 
       stopwatch: true
     }
@@ -48,11 +54,18 @@ class MarinePFT extends React.Component {
   }
 
   toggleSwitch = () => {
-    this.setState({exChoice: !this.state.exChoice})
+    this.setState({
+      exChoice: !this.state.exChoice,
+      push: !this.state.push
+    }, () => console.log(this.state.push))
   }
 
   toggleGender = () => {
-    this.setState({gender: !this.state.gender})
+    this.setState({
+      gender: !this.state.gender,
+      male: !this.state.male
+    }, () => console.log(this.state.male))
+    
 }
 
   render () {
@@ -62,20 +75,40 @@ class MarinePFT extends React.Component {
             {this.state.stopwatch ? (<Stopwatch />) : (<Timer />)} 
             {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}
             <View style={styles.switch}>
-              <Text style={styles.switchText}>Push Ups</Text>
-              <Switch 
-                onValueChange={this.toggleSwitch} 
-                value={this.state.exChoice}
+              <CheckBox
+                center
+                title='Push Ups'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={this.state.push}
+                onPress={() => {this.state.push ? this.setState() : this.toggleSwitch()}}
               />
-              <Text style={styles.switchText}>Pull Ups</Text>
+              <CheckBox
+                center
+                title='Pull Ups'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={this.state.exChoice}
+                onPress={() => {this.state.push ? this.toggleSwitch() : this.setState()}}
+              />
             </View>
             <View style={styles.switch}>
-              <Text style={styles.switchText}>Male</Text>
-              <Switch 
-                onValueChange={this.toggleGender} 
-                value={this.state.gender}
+              <CheckBox
+                center
+                title='Male'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={this.state.male}
+                onPress={() => {this.state.male ? this.setState() : this.toggleGender()}}
               />
-              <Text style={styles.switchText}>Female</Text>
+              <CheckBox
+                center
+                title='Female'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={this.state.gender}
+                onPress={() => {this.state.male ? this.toggleGender() : this.setState()}}
+              />
             </View>
             {this.state.exChoice ? (<StationInput station={"Pull Ups"} calc={this.scoreCalc} pf={true} />) : (<StationInput station={"Push Ups"} calc={this.scoreCalc} pf={true} />)}
             <StationInput station={"Crunches"} calc={this.scoreCalc} pf={true} />
