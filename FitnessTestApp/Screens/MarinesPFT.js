@@ -25,15 +25,15 @@ class MarinePFT extends React.Component {
     this.state = {
       exChoice: true,
       pushUps: 0,
-    //   pushUpsResult: false,
+
       crunches: 0,
-    //   sitUpsResult: false,
+
       pullUps: 0,
-    //   pullUpsResult: false,
+
       run: 0,
-    //   runResult: false,
-      gender: "Male",
-    //   swimResult: false,
+
+      gender: false,
+
       stopwatch: true
     }
   }
@@ -48,8 +48,12 @@ class MarinePFT extends React.Component {
   }
 
   toggleSwitch = () => {
-      this.setState({exChoice: !this.state.exChoice})
+    this.setState({exChoice: !this.state.exChoice})
   }
+
+  toggleGender = () => {
+    this.setState({gender: !this.state.gender})
+}
 
   render () {
       return (
@@ -58,8 +62,20 @@ class MarinePFT extends React.Component {
             {this.state.stopwatch ? (<Stopwatch />) : (<Timer />)} 
             {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}
             <View style={styles.switch}>
-              <Text>Exercise Option</Text>
-              <Switch onValueChange={this.toggleSwitch} value={this.state.exChoice} />
+              <Text style={styles.switchText}>Push Ups</Text>
+              <Switch 
+                onValueChange={this.toggleSwitch} 
+                value={this.state.exChoice}
+              />
+              <Text style={styles.switchText}>Pull Ups</Text>
+            </View>
+            <View style={styles.switch}>
+              <Text style={styles.switchText}>Male</Text>
+              <Switch 
+                onValueChange={this.toggleGender} 
+                value={this.state.gender}
+              />
+              <Text style={styles.switchText}>Female</Text>
             </View>
             {this.state.exChoice ? (<StationInput station={"Pull Ups"} calc={this.scoreCalc} pf={true} />) : (<StationInput station={"Push Ups"} calc={this.scoreCalc} pf={true} />)}
             <StationInput station={"Crunches"} calc={this.scoreCalc} pf={true} />
@@ -77,9 +93,15 @@ const styles = StyleSheet.create({
       marginBottom: 40
   },
   switch: {
-    flex: 0.1,
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     paddingTop: 20,
+  },
+  switchText: {
+    flex: 0.2,
+    alignItems: "center",
+    padding: 5
   },
   text: {
     fontSize: 28,
