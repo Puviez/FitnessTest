@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
   Text,
+  Switch,
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
@@ -22,15 +23,16 @@ class MarinePFT extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
+      exChoice: true,
       pushUps: 0,
     //   pushUpsResult: false,
-      sitUps: 0,
+      crunches: 0,
     //   sitUpsResult: false,
       pullUps: 0,
     //   pullUpsResult: false,
       run: 0,
     //   runResult: false,
-      swim: 0,
+      gender: "Male",
     //   swimResult: false,
       stopwatch: true
     }
@@ -38,28 +40,6 @@ class MarinePFT extends React.Component {
 
   scoreCalc = (reps, station) => {
     let points
-    switch (station) {
-        case ("500 Yard Swim") :
-            reps > 750 ? points = "Fail" : points = "Pass";
-            this.setState({swim: points});
-            break;
-        case ("Push Ups") :
-            reps >= 50 ? points = "Pass" : points = "Fail";
-            this.setState({pushUps: points});
-            break;
-        case ("Sit Ups") :
-            reps >= 50 ? points = "Pass" : points = "Fail";
-            this.setState({sitUps: points});
-            break;
-        case ("Pull Ups") :
-            reps >= 10 ? points = "Pass" : points = "Fail";
-            this.setState({pullUps: points});
-            break;
-        case ("2.4km Run") :
-            reps > 630 ? points = "Fail" : points = "Pass";
-            this.setState({run: points});
-            break;
-    }
     return points;
   }
 
@@ -67,19 +47,23 @@ class MarinePFT extends React.Component {
     this.setState({stopwatch: !this.state.stopwatch})
   }
 
+  toggleSwitch = () => {
+      this.setState({exChoice: !this.state.exChoice})
+  }
+
   render () {
       return (
           <View style={styles.container}>
-            <Text style={styles.text}>US Navy Seals PST</Text>
+            <Text style={styles.text}>US Marines PFT</Text>
             {this.state.stopwatch ? (<Stopwatch />) : (<Timer />)} 
-            {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}  
-            <TimeInput station={"500 Yard Swim"} calc={this.scoreCalc} pf={true} />       
-            <StationInput station={"Push Ups"} calc={this.scoreCalc} pf={true} />
-            <StationInput station={"Sit Ups"} calc={this.scoreCalc} pf={true} />
-            <StationInput station={"Pull Ups"} calc={this.scoreCalc} pf={true} />
-            <TimeInput station={"2.4km Run"} calc={this.scoreCalc} pf={true} /> 
-            {this.state.pushUps && this.state.run && this.state.sitUps && this.state.swim && this.state.pullUps === "Pass" ? 
-                (<Text style={styles.pass}>Result: PASS</Text>) : (<Text style={styles.fail}>Result: FAIL</Text>)}
+            {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}
+            <View style={styles.switch}>
+              <Text>Exercise Option</Text>
+              <Switch onValueChange={this.toggleSwitch} value={this.state.exChoice} />
+            </View>
+            {this.state.exChoice ? (<StationInput station={"Pull Ups"} calc={this.scoreCalc} pf={true} />) : (<StationInput station={"Push Ups"} calc={this.scoreCalc} pf={true} />)}
+            <StationInput station={"Crunches"} calc={this.scoreCalc} pf={true} />
+            <TimeInput station={"3 Mile Run"} calc={this.scoreCalc} pf={true} /> 
           </View>
       )
   }
@@ -92,8 +76,14 @@ const styles = StyleSheet.create({
       alignItems: "center",
       marginBottom: 40
   },
+  switch: {
+    flex: 0.1,
+    flexDirection: "row",
+    paddingTop: 20,
+  },
   text: {
-    fontSize: 28
+    fontSize: 28,
+    padding: 10
   },
   fail: {
     fontSize: 28,
