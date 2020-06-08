@@ -1555,7 +1555,7 @@ class IPPT extends React.Component {
             <Text style={styles.text}>IPPT</Text>
             {this.state.stopwatch ? (<Stopwatch />) : (<Timer />)} 
             {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}
-            <View>
+            <View style={styles.age}>
               <Text>Age: </Text>
               <RNPickerSelect 
                   placeholder={{label: "Age", value: "Age"}}
@@ -1570,8 +1570,8 @@ class IPPT extends React.Component {
               />
             </View>   
             <TimeInput station={"2.4km Run"} calc={this.scoreCalc} age={this.state.age} />       
-            <StationInput station={"Push Ups"} calc={this.scoreCalc} age={this.state.age} />
-            <StationInput station={"Sit Ups"} calc={this.scoreCalc} age={this.state.age} />
+            <StationInput station={"Push Ups"} calc={this.scoreCalc} age={this.state.age} max={101} />
+            <StationInput station={"Sit Ups"} calc={this.scoreCalc} age={this.state.age} max={101} />
             <Text style={styles.text}>Total: {this.updateTotal()} Points</Text>
             {this.updateTotal() >= 90 ? (<Text style={styles.gold}>GOLD (Commando/Divers)</Text>) : 
               this.updateTotal() >= 85 ? (<Text style={styles.gold}>GOLD</Text>) : 
@@ -1604,6 +1604,12 @@ const styles = StyleSheet.create({
   pass: {
     fontSize: 28,
     backgroundColor: "lightgreen"
+  },
+  age: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 20,
   }
 
 })

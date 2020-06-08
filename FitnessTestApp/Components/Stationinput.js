@@ -37,7 +37,7 @@ class StationInput extends React.Component {
     }
 
     render () {
-        const repCount = [...Array(101).keys()];
+        const repCount = [...Array(this.props.max).keys()];
         
         return (
             <View style={styles.container}>

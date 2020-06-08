@@ -74,9 +74,9 @@ class SealPST extends React.Component {
             {this.state.stopwatch ? (<Stopwatch />) : (<Timer />)} 
             {this.state.stopwatch ? (<Buttons func={this.toggleTimer} name={"Timer"} />) : (<Buttons func={this.toggleTimer} name={"Stopwatch"} />)}  
             <TimeInput station={"500 Yard Swim"} calc={this.scoreCalc} pf={true} />       
-            <StationInput station={"Push Ups"} calc={this.scoreCalc} pf={true} />
-            <StationInput station={"Sit Ups"} calc={this.scoreCalc} pf={true} />
-            <StationInput station={"Pull Ups"} calc={this.scoreCalc} pf={true} />
+            <StationInput station={"Push Ups"} calc={this.scoreCalc} pf={true} max={151} />
+            <StationInput station={"Sit Ups"} calc={this.scoreCalc} pf={true} max={151} />
+            <StationInput station={"Pull Ups"} calc={this.scoreCalc} pf={true} max={101} />
             <TimeInput station={"2.4km Run"} calc={this.scoreCalc} pf={true} /> 
             {this.state.pushUps && this.state.run && this.state.sitUps && this.state.swim && this.state.pullUps === "Pass" ? 
                 (<Text style={styles.pass}>Result: PASS</Text>) : (<Text style={styles.fail}>Result: FAIL</Text>)}
