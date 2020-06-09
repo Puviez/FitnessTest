@@ -2756,7 +2756,10 @@ class MarinePFT extends React.Component {
   scoreCalc = (reps, station) => {
     let points = 0;
     let ageGroup = 1;
+    let gend;
     let scoreChart;
+    station === "Push Ups" ? scoreChart = pushUpScoreChart : station === "Pull Ups" ? scoreChart = pullUpScoreChart : station === "Crunches" ? scoreChart = sitUpScoreChart : scoreChart = runScoreChart
+    this.state.male ? gend = "male" : gend = "female"
     const age = parseInt(this.state.age)
     switch (true) {
       case (age >= 51):
@@ -2783,6 +2786,24 @@ class MarinePFT extends React.Component {
       default:
         ageGroup = 1;
     }
+
+    station === "3 Mile Run" ? (reps < Math.min(... Object.keys(scoreChart[gend][ageGroup])) ? points = 100 : (reps > Math.max(... Object.keys(scoreChart[gend][ageGroup])) ? points = 0 : points = scoreChart[gend][ageGroup][reps])) : 
+    (Object.keys(scoreChart[gend][ageGroup]).forEach((key) => {
+      scoreChart[gend][ageGroup][key].includes(parseInt(reps)) ? points = key : points = points
+    }))
+
+    station === "Push Ups" ? (this.setState({
+      pushUps: points,
+      pullUps: 0
+    })) : station === "Pull Ups" ? (this.setState({
+      pullUps: points,
+      pushUps: 0
+    })) : station === "Crunches" ? (this.setState({
+      crunches: points
+    })) : (this.setState({
+      run: points
+    }))
+
     return points;
   }
 
@@ -2861,9 +2882,11 @@ class MarinePFT extends React.Component {
                           }))} 
               />
             </View>   
-            {this.state.exChoice ? (<StationInput station={"Pull Ups"} calc={this.scoreCalc} pf={true} max={51}/>) : (<StationInput station={"Push Ups"} calc={this.scoreCalc} pf={true} max={101}/>)}
-            <StationInput station={"Crunches"} calc={this.scoreCalc} pf={true} max={101} />
-            <TimeInput station={"3 Mile Run"} calc={this.scoreCalc} pf={true} max={101} /> 
+            {this.state.exChoice ? (<StationInput station={"Pull Ups"} calc={this.scoreCalc} pf={true} max={51} age={this.state.age} gender={this.state.gender} ex={this.state.push }/>) : (<StationInput station={"Push Ups"} calc={this.scoreCalc} pf={true} max={101} age={this.state.age} gender={this.state.gender} ex={this.state.push} />)}
+            <StationInput station={"Crunches"} calc={this.scoreCalc} pf={true} max={151} age={this.state.age} gender={this.state.gender} />
+            <TimeInput station={"3 Mile Run"} calc={this.scoreCalc} pf={true} age={this.state.age} gender={this.state.gender} /> 
+            {(this.state.pushUps >= 40 || this.state.pullUps >= 40) && this.state.run && this.state.crunches >= 40 ? 
+                (<Text style={styles.pass}>Result: PASS</Text>) : (<Text style={styles.fail}>Result: FAIL</Text>)}
           </View>
       )
   }

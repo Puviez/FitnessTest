@@ -31,7 +31,7 @@ class StationInput extends React.Component {
 
     // Just for IPPT
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.age !== this.props.age) {
+        if (prevProps.age !== this.props.age || prevProps.gender !== this.props.gender || prevProps.ex !== this.props.ex) {
             this.scoreCalc();
         }
     }
